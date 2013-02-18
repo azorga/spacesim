@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<project name="Ant-Test" default="main" basedir=".">
+  <!-- Sets variables which can later be used. -->
+  <!-- The value of a property is accessed via ${} -->
+
+	  <property name="src.dir" location="src" />
+	  <property name="res.dir" location="resources" />
+		<property name="build.dir" location="build" />
+	  <property name="dist.dir" location="dist" />
+	  <property name="docs.dir" location="docs" />
+
+
+
+  <!-- Variables used for JUnit testin -->
+  <property name="test.dir" location="src" />
+  <property name="test.report.dir" location="testreport" />
+
+  <!-- Define the classpath which includes the junit.jar and the classes after compiling-->
+	  <!-- Define the classpath which includes the junit.jar and the classes after compiling-->
+	  <path id="jar.class.path">
+	  	<!--<pathelement location="lib/junit-4.11.jar" /> -->
+	  	<pathelement location="lib/junit-4.11.jar" />
+	  	<pathelement location="lib/lwjgl.jar" />
+	  	<pathelement location="lib/slick.jar" />
+	    <pathelement location="${build.dir}" />
+	  </path>
+
+
+  <!-- Deletes the existing build, docs and dist directory-->
+  <target name="clean">
+    <delete dir="${test.report.dir}" />
+        <delete dir="${build.dir}" />
+        <delete dir="${docs.dir}" />
+        <delete dir="${dist.dir}" />
+  </target>
+
+  <!-- Creates the  build, docs and dist directory-->
+  <target name="makedir">
+  	<mkdir dir="${build.dir}" />
+    <mkdir dir="${docs.dir}" />
+    <mkdir dir="${dist.dir}" />
+    <mkdir dir="${test.report.dir}" />
+  </target>
+
+  <!-- Compiles the java code (including the usage of library for JUnit -->
+  <target name="compile" depends="clean, makedir">
+    <javac srcdir="${src.dir}" destdir="${build.dir}">
+      <classpath refid="jar.class.path" />
+    </javac>
+
+  </target>
+
+  <!-- Run the JUnit Tests -->
+  <!-- Output is XML, could also be plain-->
+  <target name="junit" depends="compile">
+    <junit printsummary="on" fork="true" haltonfailure="yes">
+      <classpath refid="jar.class.path" />
+      <formatter type="xml" />
+      <batchtest todir="${test.report.dir}">
+        <fileset dir="${src.dir}">
+          <include name="**/*test*.java" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+	
+	
+	
+	  <!--Creates the deployable jar file  -->
+	  <target name="jar" depends="compile">
+	    <jar destfile="${dist.dir}\azorga.jar" basedir="${build.dir}">
+	      <manifest>
+	        <attribute name="Main-Class" value="de.azorga.krazyivan.game.main.Azorga" />
+	      </manifest>
+	    </jar>
+	  </target>
+
+
+	
+  <target name="main" depends="compile, junit, jar">
+    <description>Main target</description>
+  </target>
+
+</project> 
