@@ -25,6 +25,7 @@ import de.azorga.krazyivan.game.core.component.RectangularPolygonComponent;
 import de.azorga.krazyivan.game.core.component.WeaponComponent;
 import de.azorga.krazyivan.game.core.entity.Entity;
 import de.azorga.krazyivan.game.core.entity.FixEntity;
+import de.azorga.krazyivan.game.core.entity.MovingEntity;
 import de.azorga.krazyivan.game.core.entity.PlayerEntity;
 import de.azorga.krazyivan.game.effects.AzorgaParticleSystem;
 import de.azorga.krazyivan.game.tools.EntitiyCreator;
@@ -58,7 +59,7 @@ public class AzorgaGame extends BasicGameState implements MusicListener{
 	Vector<PlayerEntity> players;
 	Vector<FixEntity> planets = new Vector<FixEntity>();
 	Vector<FixEntity> stars = new Vector<FixEntity>();
-	Vector<Entity> asteroids;
+	Vector<MovingEntity> asteroids = new Vector<MovingEntity>();
 	Vector<Entity> lasers = new Vector<Entity>();
 	Vector<FixEntity> starbases = new Vector<FixEntity>();
 	/**
@@ -113,6 +114,9 @@ public class AzorgaGame extends BasicGameState implements MusicListener{
 			for(FixEntity starbase : starbases){
 				starbase.render(container, null, g);
 			}
+			for(MovingEntity asteroid : asteroids){
+				asteroid.render(container, null, g);
+			}
 		}
 		/**
 		 * Ein paar Ausgaben auf der GUI
@@ -163,6 +167,9 @@ public class AzorgaGame extends BasicGameState implements MusicListener{
 				for(FixEntity starbase : starbases){
 					starbase.update(container, null, delta);
 				}
+				for(MovingEntity asteroid : asteroids){
+					asteroid.update(container, null, delta);
+				}
 
 			}
 		}
@@ -178,6 +185,7 @@ public class AzorgaGame extends BasicGameState implements MusicListener{
 		planets = EntitiyCreator.createPlanets(800, me);
 		stars = EntitiyCreator.createStars(10000, me);
 		starbases = EntitiyCreator.createBases(600, me);
+		asteroids = EntitiyCreator.createAsteroids(10000, me);
 	}
 
 	private void createplayer() throws SlickException {

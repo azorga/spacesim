@@ -5,8 +5,8 @@ public class MovingEntity extends Entity {
 	boolean destroyable = false;
 	float speed = 0;
 	
-	public MovingEntity(String id, float x, float y, boolean destroyable, float speed) {
-		super(id, x, y);
+	public MovingEntity(String id,  boolean destroyable, float speed) {
+		super(id);
 		// TODO Auto-generated constructor stub
 		this.destroyable = destroyable;
 		this.speed = speed;

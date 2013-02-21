@@ -65,7 +65,11 @@ public class PlayerMovementComponent extends Component{
 			
 		}
 		
-		
+		if(input.isKeyPressed(Input.KEY_S)){
+			
+			((PlayerEntity)owner).fullStop();
+			
+		}
 		((PlayerEntity)owner).setRotation(rotation);
 	
 		//some maths-magic...
