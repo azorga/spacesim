@@ -30,17 +30,21 @@ public class MoveComponent  extends RenderComponent {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
 		if(owner.getPosition().x >= 0 && owner.getPosition().y >=0 && owner.getPosition().x <=800 && owner.getPosition().y <=600){
-			image.draw(owner.getPosition().x,owner.getPosition().y, 1);			
+			image.draw(owner.getPosition().x,owner.getPosition().y, 1);	
+			gr.drawString(((MovingEntity)owner).getPosition().x + " " + ((MovingEntity)owner).getPosition().y + " " + ((MovingEntity)owner).getObjectSpeed(), 
+					((MovingEntity)owner).getPosition().x,	
+					((MovingEntity)owner).getPosition().y + this.image.getHeight());	
 		}		
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sb, int delta) {
 		Vector2f position = owner.getPosition();
-		position.x -=  owner.getSpeed()* java.lang.Math.sin(java.lang.Math.toRadians(owner.getRotation())) 
-					- me.getSpeed();
-		position.y +=  owner.getSpeed()* java.lang.Math.cos(java.lang.Math.toRadians(owner.getRotation())) 
-					+ me.getSpeed();;	
+		
+		position.x -=  ((MovingEntity)owner).getObjectSpeed()* java.lang.Math.sin(java.lang.Math.toRadians(((MovingEntity)owner).getRotation()));
+					
+		position.y +=  ((MovingEntity)owner).getObjectSpeed()* java.lang.Math.cos(java.lang.Math.toRadians(((MovingEntity)owner).getRotation()));
+						
 		
 		
 	}

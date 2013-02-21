@@ -11,5 +11,11 @@ public class MovingEntity extends Entity {
 		this.destroyable = destroyable;
 		this.speed = speed;
 	}
+	
+	public float getObjectSpeed(){
+		return this.speed;
+	}
+	
+	
 
 }
