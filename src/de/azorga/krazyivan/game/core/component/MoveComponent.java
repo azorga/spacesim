@@ -40,10 +40,13 @@ public class MoveComponent  extends RenderComponent {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sb, int delta) {
 		Vector2f position = owner.getPosition();
-		
-		position.x -=  ((MovingEntity)owner).getObjectSpeed()* java.lang.Math.sin(java.lang.Math.toRadians(((MovingEntity)owner).getRotation()));
+
+
+		position.x -=  ((MovingEntity)owner).getObjectSpeed()* java.lang.Math.sin(java.lang.Math.toRadians(((MovingEntity)owner).getRotation()))
+						- me.getSpeed() * java.lang.Math.sin(java.lang.Math.toRadians(me.getRotation()));
 					
-		position.y +=  ((MovingEntity)owner).getObjectSpeed()* java.lang.Math.cos(java.lang.Math.toRadians(((MovingEntity)owner).getRotation()));
+		position.y +=  ((MovingEntity)owner).getObjectSpeed()* java.lang.Math.cos(java.lang.Math.toRadians(((MovingEntity)owner).getRotation()))
+						- me.getSpeed() * java.lang.Math.sin(java.lang.Math.toRadians(me.getRotation()));
 						
 		
 		

@@ -7,7 +7,7 @@ public class PlayerEntity extends Entity {
 	float speed = 0;
 	String playername;
 	final float maxspeed = 2;
-	final float minspeed = -1;
+	final float minspeed = 0;
 	public String getPlayername() {
 		return playername;
 	}

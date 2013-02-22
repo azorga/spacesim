@@ -36,7 +36,7 @@ public class NoMoveComponent extends RenderComponent {
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
-		if(owner.getPosition().x >= 0 && owner.getPosition().y >=0 && owner.getPosition().x <=800 && owner.getPosition().y <=600){
+		if(owner.getPosition().x >= -800 && owner.getPosition().y >=-600 && owner.getPosition().x <=800 && owner.getPosition().y <=600){
 			image.draw(owner.getPosition().x,owner.getPosition().y, 1);
 			if(showInformation){
 				gr.drawString(((FixEntity)owner).getBezeichnung(), 
